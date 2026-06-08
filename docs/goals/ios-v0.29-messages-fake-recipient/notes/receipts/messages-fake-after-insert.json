@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "exactlyOnce": true,
+    "fakeRecipientStillPresent": true,
+    "foilKeyboardRoot": true,
+    "insertLatestDisabledOrNoTranscript": true,
+    "transcriptValueCount": 1
+  },
+  "messageNodes": [
+    {
+      "containsTranscript": true,
+      "enabled": "true",
+      "height": "86",
+      "label": "Message",
+      "name": "messageBodyField",
+      "type": "XCUIElementTypeTextField",
+      "valueHash": "4999778a3af83882",
+      "valueLength": 22,
+      "visible": "true",
+      "width": "267",
+      "x": "83",
+      "y": "402"
+    }
+  ],
+  "printedRawSource": false,
+  "schema": "foil.iosV029.messagesFakeAfterInsert.v1",
+  "source": {
+    "file": "foil-ios-v029-after-insert-source.json",
+    "sha256": "60adecb6e91d8afcc30386b6feb4f6d912501406b94bd477ab0c9a60b0210ea4"
+  },
+  "target": "messages-fake-after-insert"
+}
