@@ -1,0 +1,14 @@
+{
+  "bytes": 28541,
+  "loaded": true,
+  "needlePresence": {
+    "Foil iOS Sterile Fixture": true,
+    "Normal text field": true,
+    "Secure text field": true,
+    "normal length: 0": true,
+    "secure length: 0": true
+  },
+  "printedRawSource": false,
+  "schema": "foil.iosV026.safariFixtureLoaded.v1",
+  "sourceSha256": "262423115df5fe68220a93d7e30b5f232713314ae3ff01f00309d585e0dadfd4"
+}

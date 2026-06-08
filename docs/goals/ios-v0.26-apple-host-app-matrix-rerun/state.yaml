@@ -1,0 +1,194 @@
+version: 2
+
+goal:
+  title: "Foil iOS v0.26 Apple Host-App Matrix Rerun"
+  slug: "ios-v0.26-apple-host-app-matrix-rerun"
+  kind: recovery
+  tranche: "Rerun host-app insertion rows after WDA direct-URL recovery."
+  status: done
+  oracle:
+    signal: "Each Apple host-app row has a sanitized pass/blocker receipt using WDA direct URL http://192.168.1.40:8100."
+    cadence: "after each row and after final cleanup"
+    final_proof: "Notes, Messages, Mail, Safari normal, and Safari secure rows are passed or precisely blocked; App Group is idle/no transcript after cleanup."
+  intake:
+    original_request: "great do this now"
+    interpreted_outcome: "Run the Apple host-app matrix using the recovered physical UI automation path."
+    input_shape: recovery
+    audience: "Foil owner/developer preparing closed beta"
+    authority: approved
+    proof_type: demo
+    completion_proof: "Sanitized WDA/App Group receipts for all required rows."
+    likely_misfire: "Testing only Foil app-side transcription or a private host-app surface and calling it host-app insertion proof."
+    blind_spots_considered:
+      - "Messages/Mail may expose private content unless the operator opens a sterile field first."
+      - "Safari secure fields should reject custom keyboards; a normal insertion pass is not enough."
+      - "Post-insert App Group cleanup must prove exact-once behavior."
+
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  goal_pressure_requires_oracle: true
+  no_completion_on_weak_proof: true
+
+agents:
+  scout: installed
+  worker: installed
+  judge: installed
+
+visual_board:
+  selected: local
+  local:
+    status: pending
+    url: "http://goalbuddy.localhost:41737/ios-v0-26-apple-host-app-matrix-rerun/"
+    command: "npx goalbuddy board docs/goals/ios-v0.26-apple-host-app-matrix-rerun"
+
+active_task: null
+
+tasks:
+  - id: T001
+    type: scout
+    assignee: Scout
+    status: done
+    reasoning_hint: high
+    objective: "Establish WDA/App Group readiness and privacy-safe row order."
+    inputs:
+      - "docs/ios-physical-automation-runbook.md"
+      - "docs/goals/ios-v0.25-physical-ui-automation-recovered/notes/receipts/wda-direct-url-recovery.json"
+    constraints:
+      - "Do not inspect private host-app trees."
+      - "Use direct WDA URL from ServerURLHere."
+    expected_output:
+      - "notes/T001-readiness.md"
+      - "notes/receipts/wda-status.json"
+      - "notes/receipts/app-group-before.json"
+    acceptance_criteria:
+      - "WDA is ready through direct URL or exact blocker is recorded."
+      - "App Group state is known before staging a transcript."
+    receipt:
+      result: done
+      task_id: T001
+      note: "notes/T001-readiness.md"
+      summary: "WDA was ready on the direct URL and App Group started idle/no transcript."
+      evidence:
+        wda_status: "notes/receipts/wda-status.json"
+        app_group_before: "notes/receipts/app-group-before.json"
+
+  - id: T002
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Run Safari sterile normal-field insertion and secure-field rejection rows."
+    allowed_files:
+      - "docs/goals/ios-v0.26-apple-host-app-matrix-rerun/**"
+    verify:
+      - "Stage sterile transcript."
+      - "Open local Safari fixture."
+      - "Focus normal field, switch/use Foil Keyboard, tap Insert latest, verify value count and cleanup."
+      - "Focus secure field, verify Foil Keyboard/Insert latest are absent."
+    stop_if:
+      - "Safari opens a private page/history surface instead of the sterile fixture."
+      - "Raw source or screenshots would need to be committed."
+    expected_output:
+      - "notes/T002-safari.md"
+      - "Sanitized receipts for normal and secure rows."
+    acceptance_criteria:
+      - "Normal field insertion passes with exact value-count proof."
+      - "Secure field rejection passes with Foil Keyboard absent."
+    receipt:
+      result: done
+      task_id: T002
+      note: "notes/T002-safari.md"
+      summary: "Safari normal-field insertion and secure-field rejection passed on the sterile local fixture."
+      evidence:
+        normal_before: "notes/receipts/safari-retry-before-insert.json"
+        normal_after: "notes/receipts/safari-retry-after-insert.json"
+        normal_app_group: "notes/receipts/safari-retry-app-group-after-insert.json"
+        secure_focused: "notes/receipts/safari-secure-focused.json"
+        secure_app_group: "notes/receipts/safari-secure-app-group-after-focus.json"
+        cleanup: "notes/receipts/safari-secure-cleanup.json"
+      learned:
+        - "Keyboard-extension source coordinates are local; the passing visible Insert latest tap used full-screen coordinate y=615."
+
+  - id: T003
+    type: worker
+    assignee: Worker
+    status: blocked
+    reasoning_hint: high
+    objective: "Run Notes sterile editor insertion row if a sterile editor can be safely reached."
+    allowed_files:
+      - "docs/goals/ios-v0.26-apple-host-app-matrix-rerun/**"
+    verify:
+      - "Stage sterile transcript."
+      - "Open or use a fresh sterile Notes editor without inspecting private notes."
+      - "Verify Foil Keyboard Insert latest enabled, tap it, and verify exact-once insertion plus cleanup."
+    stop_if:
+      - "Notes opens to a private notes list or non-sterile note."
+      - "A fresh editor cannot be reached without inspecting private content."
+    expected_output:
+      - "notes/T003-notes.md"
+      - "Sanitized Notes receipts or precise blocker."
+    acceptance_criteria:
+      - "Notes insertion passes with value-count proof and App Group idle cleanup, or precise privacy blocker is recorded."
+    receipt:
+      result: blocked
+      task_id: T003
+      note: "notes/T003-notes.md"
+      summary: "Notes requires an operator-opened fresh blank note; this run did not inspect private Notes surfaces."
+      unblock: "Open a fresh blank Notes editor with Foil Keyboard focused."
+
+  - id: T004
+    type: worker
+    assignee: Worker
+    status: blocked
+    reasoning_hint: high
+    objective: "Assess Messages and Mail rows without exposing private content."
+    allowed_files:
+      - "docs/goals/ios-v0.26-apple-host-app-matrix-rerun/**"
+    verify:
+      - "Use only operator-opened sterile Messages thread or Mail compose."
+      - "Record precise blockers if sterile fields are not open."
+    stop_if:
+      - "Messages conversation list, Mail inbox, contacts, recipients, or account content appears."
+    expected_output:
+      - "notes/T004-messages-mail.md"
+      - "Sanitized pass/blocker receipts."
+    acceptance_criteria:
+      - "Messages and Mail are passed only with sterile field proof, otherwise blocked with exact next operator action."
+    receipt:
+      result: blocked
+      task_id: T004
+      note: "notes/T004-messages-mail.md"
+      summary: "Messages and Mail require operator-opened sterile fields; this run did not inspect private thread/inbox surfaces."
+      unblock: "Open a sterile Messages thread or blank Mail compose field with the cursor focused."
+
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Audit matrix readiness and cleanup."
+    inputs:
+      - "All row receipts"
+      - "docs/acceptance-evidence.md"
+    constraints:
+      - "Do not claim rows that were blocked."
+      - "Require App Group idle/no transcript after final cleanup."
+    expected_output:
+      - "notes/T999-final-audit.md"
+    acceptance_criteria:
+      - "Strongest realistic failure modes are named and ruled out or carried as residual risk."
+      - "GoalBuddy board artifact, receipt parsing, git diff check, and privacy scan pass."
+    receipt:
+      result: partial_pass_with_operator_blockers
+      task_id: T999
+      decision: partial_pass_with_operator_blockers
+      note: "notes/T999-final-audit.md"
+      full_outcome_complete: false
+      summary: "Safari normal and secure rows passed; Notes, Messages, and Mail are blocked pending operator-opened sterile fields."
