@@ -1,0 +1,115 @@
+version: 2
+
+goal:
+  title: "Foil iOS v0.29 Messages Fake Recipient Row"
+  slug: "ios-v0.29-messages-fake-recipient"
+  kind: recovery
+  tranche: "Prove Messages draft insertion using a fake-recipient compose path."
+  status: done
+  oracle:
+    signal: "Sanitized WDA/App Group receipts prove exact-once insertion, no send, and cleanup."
+    cadence: "before insert, after insert, after cleanup"
+    final_proof: "Messages fake-recipient draft pass with no private content committed."
+  intake:
+    original_request: "can you try this"
+    interpreted_outcome: "Try a fake phone number Messages compose path for safe insertion testing."
+    input_shape: recovery
+    audience: "Foil owner/developer preparing closed beta"
+    authority: approved
+    proof_type: demo
+    completion_proof: "Fake-recipient Messages draft insertion passes or blocks safely."
+    likely_misfire: "Claiming real Messages delivery support from an unsent fake-recipient draft."
+    blind_spots_considered:
+      - "Messages may expose private thread lists if launched normally."
+      - "A fake recipient row must not send anything."
+      - "Draft and App Group cleanup are required after insertion."
+
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  goal_pressure_requires_oracle: true
+  no_completion_on_weak_proof: true
+
+agents:
+  scout: installed
+  worker: installed
+  judge: installed
+
+visual_board:
+  selected: local
+  local:
+    status: pending
+    url: "http://goalbuddy.localhost:41737/ios-v0-29-messages-fake-recipient/"
+    command: "npx goalbuddy board docs/goals/ios-v0.29-messages-fake-recipient"
+
+active_task: null
+
+tasks:
+  - id: T001
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Run the fake-recipient Messages draft row."
+    allowed_files:
+      - "docs/goals/ios-v0.29-messages-fake-recipient/**"
+    verify:
+      - "Open Messages through a fake-recipient compose path without navigating private threads."
+      - "Stage a sterile transcript."
+      - "Verify Foil Keyboard Insert latest is enabled."
+      - "Tap Insert latest and prove exact-once body insertion."
+      - "Do not send."
+      - "Clear the draft body and reset App Group."
+    stop_if:
+      - "Private Messages thread/list content appears."
+      - "A send action would be required."
+    expected_output:
+      - "notes/T001-messages-fake-recipient.md"
+      - "Sanitized receipts under notes/receipts/"
+    acceptance_criteria:
+      - "Transcript appears exactly once in the draft body."
+      - "No send action occurs."
+      - "Draft body cleanup removes the transcript."
+      - "App Group cleanup returns idle/no transcript."
+    receipt:
+      result: passed_fake_recipient_draft
+      task_id: T001
+      note: "notes/T001-messages-fake-recipient.md"
+      summary: "Messages fake-recipient compose draft accepted Foil Keyboard insertion exactly once without sending."
+      evidence:
+        staged: "notes/receipts/messages-fake-stage-transcript.json"
+        before_insert: "notes/receipts/messages-fake-before-insert.json"
+        after_insert: "notes/receipts/messages-fake-after-insert.json"
+        draft_cleanup: "notes/receipts/messages-fake-draft-cleanup.json"
+        app_group_cleanup: "notes/receipts/messages-fake-app-group-cleanup.json"
+
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Audit the fake-recipient Messages row."
+    inputs:
+      - "T001 receipts"
+      - "docs/acceptance-evidence.md"
+    constraints:
+      - "Do not claim delivery or real-recipient behavior."
+      - "Do not claim private existing-thread coverage."
+    expected_output:
+      - "notes/T999-final-audit.md"
+    acceptance_criteria:
+      - "Strongest realistic privacy/scope failure is named and ruled out."
+      - "Receipts prove exact-once insertion, no send, draft cleanup, and App Group cleanup."
+    receipt:
+      result: messages_fake_recipient_pass
+      task_id: T999
+      decision: messages_fake_recipient_pass
+      note: "notes/T999-final-audit.md"
+      full_outcome_complete: true
+      summary: "Messages fake-recipient draft insertion is proven; delivery/real-recipient behavior remains out of scope."

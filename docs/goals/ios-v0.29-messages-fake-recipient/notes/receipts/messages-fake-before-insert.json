@@ -1,0 +1,28 @@
+{
+  "checks": {
+    "foilKeyboardRoot": true,
+    "insertLatestEnabled": true,
+    "insertLatestLabel": "Insert latest",
+    "insertLatestPresent": true
+  },
+  "insertButtonNodes": [
+    {
+      "enabled": "true",
+      "height": "62",
+      "label": "Insert latest",
+      "name": "foil-keyboard-insert-latest",
+      "type": "XCUIElementTypeButton",
+      "visible": "true",
+      "width": "374",
+      "x": "20",
+      "y": "101"
+    }
+  ],
+  "printedRawSource": false,
+  "schema": "foil.iosV029.messagesFakeBeforeInsert.v1",
+  "source": {
+    "file": "foil-ios-v029-before-insert-source-2.json",
+    "sha256": "3205c02a39e63f0af9698aba07f8ddb11dbb4f45b04521cfdce446bd687b63eb"
+  },
+  "target": "messages-fake-before-insert"
+}
