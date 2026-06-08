@@ -1,0 +1,14 @@
+{
+  "bytes": 42411,
+  "needlePresence": {
+    "Next Keyboard": false,
+    "Normal text field": true,
+    "foil-keyboard-insert-latest": true,
+    "foil-keyboard-root": true,
+    "return": false,
+    "space": false
+  },
+  "printedRawSource": false,
+  "schema": "foil.iosV026.safariNormalFocused.v1",
+  "sourceSha256": "7e23d31e8f021865f995ca10cf79f6aa2cf3e6071b741a931993a0e6f8209701"
+}

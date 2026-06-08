@@ -1,0 +1,37 @@
+{
+  "appGroup": {},
+  "checks": [
+    {
+      "identifier": "foil-keyboard-root",
+      "kind": "requireIdentifier",
+      "passed": true,
+      "present": true
+    },
+    {
+      "attribute": "enabled",
+      "expected": "false",
+      "identifier": "foil-keyboard-insert-latest",
+      "kind": "expectIdentifierState",
+      "observed": [
+        "false"
+      ],
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 1,
+      "kind": "expectValueTextCount",
+      "passed": false,
+      "textLength": 31,
+      "textSha256": "d51f01ab5dcde538"
+    }
+  ],
+  "passed": false,
+  "schema": "foil.iosPhysicalWdaEvidence.v1",
+  "source": {
+    "file": "foil-ios-v026-safari-normal-after-adjusted-source.json",
+    "nodeCount": 161,
+    "sha256": "0c1aeeb6435e9ff51b71457c83fe4cb54eb41f52838f9b429704babda110fb65"
+  },
+  "target": "safari-normal-after-adjusted"
+}

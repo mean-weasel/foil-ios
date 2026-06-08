@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Foil iOS Sterile Fixture</title>
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 24px; }
+      label { display: block; font-weight: 600; margin-top: 24px; }
+      input { box-sizing: border-box; font-size: 18px; margin-top: 8px; padding: 12px; width: 100%; }
+      output { display: block; margin-top: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>Foil iOS Sterile Fixture</h1>
+    <label for="normal">Normal text field</label>
+    <input id="normal" name="normal" autocomplete="off" autocapitalize="none" spellcheck="false">
+    <label for="secure">Secure text field</label>
+    <input id="secure" name="secure" type="password" autocomplete="off">
+    <output id="normal-length">normal length: 0</output>
+    <output id="secure-length">secure length: 0</output>
+    <script>
+      for (const id of ["normal", "secure"]) {
+        const input = document.getElementById(id);
+        const output = document.getElementById(`${id}-length`);
+        input.addEventListener("input", () => {
+          output.textContent = `${id} length: ${input.value.length}`;
+        });
+      }
+    </script>
+  </body>
+</html>
