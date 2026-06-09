@@ -35,6 +35,15 @@ bodies from non-sterile contexts must not be committed.
 | Messages fake-recipient compose draft | Pass, draft-only | `docs/goals/ios-v0.29-messages-fake-recipient/notes/receipts/messages-fake-before-insert.json`, `messages-fake-after-insert.json`, `messages-fake-draft-cleanup.json`, `messages-fake-app-group-cleanup.json` | The row proves exactly-once draft insertion, `sendTapped=false`, draft cleanup, and App Group idle/no transcript. It does not claim delivery or existing private-thread behavior. |
 | Closed-beta readiness | Go, narrow internal beta | `docs/goals/ios-v0.30-closed-beta-readiness-audit/notes/T999-final-audit.md` | The audit explicitly limits readiness to the narrow app-to-keyboard loop and keeps Mail/arbitrary-app claims out of scope. |
 
+## Build 12 Rerun
+
+| Row | Status | Receipts | Strongest Failure Mode Checked |
+| --- | --- | --- | --- |
+| Safari local normal field | Pass | `docs/goals/ios-v0.38-build12-host-app-matrix-rerun/notes/receipts/build12-safari-normal-before.json`, `build12-safari-normal-after.json`, `build12-safari-normal-app-group-after.json` | Build 12 might have installed and rendered onboarding but failed insertion; the row proves exactly one sterile value in Safari, Insert latest disabled after insertion, and App Group idle/no transcript. |
+| Safari local secure/password field | Expected rejection pass | `docs/goals/ios-v0.38-build12-host-app-matrix-rerun/notes/receipts/build12-safari-secure-focused.json`, `build12-safari-secure-app-group-after-focus.json`, `build12-safari-secure-cleanup.json` | Secure fields might wrongly expose Foil Keyboard or consume shared transcript state; the row proves Foil controls absent, secure length `0`, transcript still staged after focus, and cleanup idle. |
+| Notes sterile editor | Privacy blocked | `docs/goals/ios-v0.38-build12-host-app-matrix-rerun/notes/receipts/build12-notes-safari-secure.json`, `build12-notes-blocker-app-group.json` | Notes opened to an editor with unknown existing content, and the blank-note URL attempt did not create a sterile editor. The row stopped before staging transcript, clearing content, or inserting. |
+| Messages fake-recipient compose draft | Privacy blocked | `docs/goals/ios-v0.38-build12-host-app-matrix-rerun/notes/receipts/build12-messages-fake-draft.json`, `build12-messages-blocker-app-group.json` | Fake-recipient payloads landed on the thread-list surface instead of New Message compose. The row stopped before staging transcript, tapping compose, inserting, or sending. |
+
 ## Next Useful Rows
 
 - Mail compose after confirming Mail is installed or installing/configuring a

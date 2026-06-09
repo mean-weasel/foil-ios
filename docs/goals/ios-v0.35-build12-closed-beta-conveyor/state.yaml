@@ -49,7 +49,7 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/ios-v0-35-build12-closed-beta-conveyor/"
     command: "npx goalbuddy board docs/goals/ios-v0.35-build12-closed-beta-conveyor"
 
-active_task: T003
+active_task: T004
 
 tasks:
   - id: T001
@@ -105,7 +105,7 @@ tasks:
   - id: T003
     type: worker
     assignee: Worker
-    status: active
+    status: done
     reasoning_hint: high
     objective: "Run the build 12 host-app matrix rerun child board."
     allowed_files:
@@ -120,13 +120,20 @@ tasks:
     acceptance_criteria:
       - "Build 12 matrix rows are proven or precisely blocked, with no private raw WDA/screenshots committed."
     receipt:
-      result: pending
+      result: done
       child_board: "docs/goals/ios-v0.38-build12-host-app-matrix-rerun/goal.md"
+      note: "Build 12 host-app matrix rerun completed with Safari normal pass, Safari secure expected-rejection pass, Notes privacy blocker, Messages privacy blocker, and Mail still deferred."
+      rows:
+        safari_normal: pass
+        safari_secure: pass_expected_rejection
+        notes: privacy_blocked
+        messages: privacy_blocked
+        mail: deferred
 
   - id: T004
     type: worker
     assignee: Worker
-    status: queued
+    status: active
     reasoning_hint: medium
     objective: "Run the build 12 tester handoff update child board."
     allowed_files:
