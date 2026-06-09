@@ -4,7 +4,7 @@ goal:
   slug: "ios-v0.42-first-run-onboarding-polish"
   kind: specific
   tranche: "Closed-beta onboarding and setup surface polish."
-  status: active
+  status: blocked
   oracle:
     signal: "A tester can complete or recover setup from the app UI, with physical iPhone proof."
     cadence: "after implementation and before PR merge"
@@ -20,7 +20,7 @@ agents:
   scout: installed
   worker: installed
   judge: installed
-active_task: T003
+active_task: null
 tasks:
   - id: T001
     type: scout
@@ -83,7 +83,19 @@ tasks:
   - id: T003
     type: judge
     assignee: Judge
-    status: active
+    status: blocked
     objective: "Verify onboarding proof and overclaim boundaries."
     acceptance_criteria:
       - "Simulator and physical receipts rule out confusing first-run or unsafe beta claims."
+    receipt:
+      result: external_blocker
+      note: "notes/T003-judge-physical-blocker.md"
+      summary: "Local and simulator proof are green, but v0.42 cannot be approved or merged as complete because iPhone-preview is unavailable, WDA is not reachable, and installing the branch requires operator approval."
+      proven:
+        - "Simulator tests and semantic UI snapshots cover first-run, partial keyboard-not-verified, and ready-to-insert states."
+        - "Copy scan found only existing disclaimers/tests for unsafe beta claims."
+      missing:
+        - "Physical iPhone install of PR #27 branch."
+        - "Physical iPhone onboarding receipts for first-run, returning-user, blocked-keyboard, and setup-complete states."
+      next_owner: "operator"
+      next_action: "Make iPhone-preview available/unlocked, approve installing the PR #27 development build, and restore WDA/equivalent physical UI automation."
