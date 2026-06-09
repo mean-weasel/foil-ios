@@ -1,0 +1,39 @@
+{
+  "appGroup": "group.com.neonwatty.FoilIOS",
+  "copyFrom": {
+    "returncode": 0,
+    "stderrBytes": 0,
+    "stderrSha256": null,
+    "stdoutBytes": 272,
+    "stdoutSha256": "9ada9194f6c4babc"
+  },
+  "copyTo": {
+    "returncode": 0,
+    "stderrBytes": 0,
+    "stderrSha256": null,
+    "stdoutBytes": 447,
+    "stdoutSha256": "690c316957322bb5"
+  },
+  "destination": "Library/foil-keyboard-snapshot.json",
+  "deviceId": "5320F5AD-2A71-50AC-94FE-207B544B6247",
+  "operation": "stage-transcript",
+  "readbackSummary": {
+    "file": "foil-keyboard-snapshot-readback.json",
+    "hasTranscript": true,
+    "messageHash": "3315539b45db4644",
+    "phase": "complete",
+    "sha256": "0f73197774af50951051781c54d4965aa76fdb061f06c3f177573e7cac4c05b1",
+    "transcriptHash": "1e4b8e3a6483fb65",
+    "transcriptLength": 36
+  },
+  "schema": "foil.iosPhysicalHarness.appGroupWrite.v1",
+  "writtenSummary": {
+    "file": "foil-keyboard-snapshot.json",
+    "hasTranscript": true,
+    "messageHash": "3315539b45db4644",
+    "phase": "complete",
+    "sha256": "0f73197774af50951051781c54d4965aa76fdb061f06c3f177573e7cac4c05b1",
+    "transcriptHash": "1e4b8e3a6483fb65",
+    "transcriptLength": 36
+  }
+}

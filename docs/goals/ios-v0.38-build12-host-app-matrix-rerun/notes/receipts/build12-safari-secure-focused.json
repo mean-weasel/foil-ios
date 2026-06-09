@@ -1,0 +1,40 @@
+{
+  "appGroup": {},
+  "checks": [
+    {
+      "identifier": "foil-keyboard-root",
+      "kind": "forbidIdentifier",
+      "passed": true,
+      "present": false
+    },
+    {
+      "identifier": "foil-keyboard-insert-latest",
+      "kind": "forbidIdentifier",
+      "passed": true,
+      "present": false
+    },
+    {
+      "kind": "requireAccessibleText",
+      "passed": true,
+      "present": true,
+      "textLength": 16,
+      "textSha256": "41316e1f3cda28d0"
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "kind": "expectValueTextCount",
+      "passed": true,
+      "textLength": 36,
+      "textSha256": "1e4b8e3a6483fb65"
+    }
+  ],
+  "passed": true,
+  "schema": "foil.iosPhysicalWdaEvidence.v1",
+  "source": {
+    "file": "foil-ios-v038-safari-secure-focused.json",
+    "nodeCount": 197,
+    "sha256": "5d1623a71dcba56743efad697720da4bc74a2a7a785da9ded7a97fe3ea15a517"
+  },
+  "target": "build12-safari-secure-focused"
+}

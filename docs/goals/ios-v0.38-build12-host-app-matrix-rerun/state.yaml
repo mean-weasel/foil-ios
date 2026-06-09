@@ -5,7 +5,7 @@ goal:
   slug: "ios-v0.38-build12-host-app-matrix-rerun"
   kind: specific
   tranche: "Rerun verified host-app rows on build 12."
-  status: live
+  status: done
   oracle:
     signal: "Build 12 physical host-app receipts prove the narrow matrix and no private content leaks."
     cadence: "after physical onboarding smoke"
@@ -30,13 +30,13 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/ios-v0-38-build12-host-app-matrix-rerun/"
     command: "npx goalbuddy board docs/goals/ios-v0.38-build12-host-app-matrix-rerun"
 
-active_task: T001
+active_task: null
 
 tasks:
   - id: T001
     type: scout
     assignee: Scout
-    status: active
+    status: done
     objective: "Map prior matrix fixtures, safe targets, and required receipts for build 12."
     allowed_files:
       - "docs/ios-keyboard-host-app-matrix.md"
@@ -50,11 +50,14 @@ tasks:
       - "Scout note names exact rows, fixtures, receipt format, and stop conditions."
     expected_output:
       - "notes/T001-matrix-preflight.md"
+    receipt:
+      result: done
+      note: "Build 12 matrix rerun can proceed on physical iPhone-preview with Notes sterile editor if safe, Safari local fixture normal/secure rows, Messages fake-recipient draft-only, and Mail deferred."
 
   - id: T002
     type: worker
     assignee: Worker
-    status: queued
+    status: done
     objective: "Run Notes, Safari normal-field, Safari secure-field, and App Group reset rows."
     allowed_files:
       - "docs/goals/ios-v0.38-build12-host-app-matrix-rerun/**"
@@ -70,11 +73,18 @@ tasks:
     expected_output:
       - "notes/T002-notes-safari-secure.md"
       - "notes/receipts/build12-notes-safari-secure.json"
+    receipt:
+      result: done
+      note: "Safari normal insertion and secure-field rejection passed on build 12; Notes stopped with a privacy blocker because the editor contained unknown existing content and no blank-note path opened."
+      rows:
+        safari_normal: pass
+        safari_secure: pass_expected_rejection
+        notes: privacy_blocked
 
   - id: T003
     type: worker
     assignee: Worker
-    status: queued
+    status: done
     objective: "Run Messages fake-recipient draft insertion without sending."
     allowed_files:
       - "docs/goals/ios-v0.38-build12-host-app-matrix-rerun/**"
@@ -90,11 +100,15 @@ tasks:
     expected_output:
       - "notes/T003-messages-fake-draft.md"
       - "notes/receipts/build12-messages-fake-draft.json"
+    receipt:
+      result: blocked
+      note: "Both fake-recipient Messages payloads landed on the private thread-list surface with no New Message/body field, so the row stopped before staging transcript or inserting."
+      next_action: "Provide a direct sterile compose path or operator-opened New Message compose with body focused."
 
   - id: T999
     type: judge
     assignee: Judge
-    status: queued
+    status: done
     objective: "Audit build 12 host-app matrix."
     verify:
       - "Check matrix rows are proven or exactly blocked."
@@ -103,3 +117,7 @@ tasks:
       - "Host-app matrix is safe input to tester handoff update."
     expected_output:
       - "notes/T999-final-audit.md"
+    receipt:
+      result: done
+      decision: "matrix_partial_go_with_exact_blockers"
+      note: "Build 12 Safari normal and secure rows passed; Notes and Messages reruns are exact privacy blockers; Mail remains deferred and no broad host-app claim is allowed."

@@ -1,0 +1,65 @@
+{
+  "schema": "foil.iosV038.build12NotesSafariSecure.v1",
+  "device": {
+    "name": "iPhone-preview",
+    "coreDeviceIdentifier": "5320F5AD-2A71-50AC-94FE-207B544B6247",
+    "osVersion": "26.5",
+    "foilBuild": "12"
+  },
+  "safariNormal": {
+    "status": "passed",
+    "fixtureUrl": "http://192.168.1.34:8945/",
+    "receipts": {
+      "stageTranscript": "build12-safari-normal-stage-transcript.json",
+      "beforeInsert": "build12-safari-normal-before.json",
+      "afterInsert": "build12-safari-normal-after.json",
+      "appGroupAfter": "build12-safari-normal-app-group-after.json"
+    },
+    "assertions": {
+      "preInsertKeyboardPresent": true,
+      "preInsertInsertLatestEnabled": true,
+      "preInsertSterileValueCount": 0,
+      "postInsertSterileValueCount": 1,
+      "postInsertInsertLatestDisabled": true,
+      "appGroupIdleAfterInsert": true
+    }
+  },
+  "safariSecure": {
+    "status": "passed_expected_rejection",
+    "receipts": {
+      "stageTranscript": "build12-safari-secure-stage-transcript.json",
+      "focused": "build12-safari-secure-focused.json",
+      "appGroupAfterFocus": "build12-safari-secure-app-group-after-focus.json",
+      "cleanup": "build12-safari-secure-cleanup.json"
+    },
+    "assertions": {
+      "foilKeyboardRootAbsent": true,
+      "insertLatestAbsent": true,
+      "secureLengthZero": true,
+      "secureFieldSterileValueCount": 0,
+      "appGroupStillStagedAfterFocus": true,
+      "appGroupIdleAfterCleanup": true
+    }
+  },
+  "notes": {
+    "status": "privacy_blocked",
+    "sourceReceiptHash": "ca4fff86fef5982179acad820a91bc15a379c93296558647aaa7d324847ff5af",
+    "sourceXmlHash": "fd24c709a78f27756b65e9cc6e9d6e7dbbdb3131cc4f1b98a3b232b340ec5431",
+    "structuralSummary": {
+      "textViewCount": 1,
+      "textFieldCount": 0,
+      "cellCount": 0,
+      "visibleTextViewCount": 1,
+      "existingValueLength": 21
+    },
+    "blocker": "Notes opened to an editor with unknown existing content, and mobilenotes://new did not create a blank sterile editor.",
+    "nextAction": "Operator should open a blank sterile Notes editor or provide a first-party blank-note automation path before rerunning Notes."
+  },
+  "privacy": {
+    "rawWdaSourcesCommitted": false,
+    "screenshotsCommitted": false,
+    "privateContentCommitted": false,
+    "transcriptBodiesCommitted": false
+  },
+  "verdict": "safari_pass_notes_privacy_blocked"
+}

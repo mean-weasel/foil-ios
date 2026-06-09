@@ -1,0 +1,56 @@
+{
+  "schema": "foil.iosV038.build12MessagesFakeDraft.v1",
+  "device": {
+    "name": "iPhone-preview",
+    "coreDeviceIdentifier": "5320F5AD-2A71-50AC-94FE-207B544B6247",
+    "osVersion": "26.5",
+    "foilBuild": "12"
+  },
+  "launchAttempts": [
+    {
+      "payloadUrl": "redacted-fake-recipient-sms-url-form-1",
+      "payloadUrlSha256": "75c19565b84e1501b51f352ecba2d4a19e45949b1e377e555b5f2bd3971e291d",
+      "sourceReceiptHash": "8f63fbe25db46f1c1de02ff23de342e93a058f370bc12d099711fbf6b7203a3a",
+      "sourceXmlHash": "12bbb97e35208ae7f2514049763f784b562dbbf7d302b079ebdc98b7662ad6e3",
+      "structuralSummary": {
+        "newMessagePresent": false,
+        "fakeRecipientPresent": false,
+        "bodyFieldPresent": false,
+        "sendButtonPresent": false,
+        "cellCount": 12,
+        "textViewCount": 0,
+        "textFieldCount": 0
+      }
+    },
+    {
+      "payloadUrl": "redacted-fake-recipient-sms-url-form-2",
+      "payloadUrlSha256": "e7777cdaeb2878d6c865e400f10b6bc9001598e21c729fe7016954b50c62254a",
+      "sourceReceiptHash": "8f63fbe25db46f1c1de02ff23de342e93a058f370bc12d099711fbf6b7203a3a",
+      "sourceXmlHash": "12bbb97e35208ae7f2514049763f784b562dbbf7d302b079ebdc98b7662ad6e3",
+      "structuralSummary": {
+        "newMessagePresent": false,
+        "fakeRecipientPresent": false,
+        "bodyFieldPresent": false,
+        "sendButtonPresent": false,
+        "cellCount": 12,
+        "textViewCount": 0,
+        "textFieldCount": 0
+      }
+    }
+  ],
+  "appGroupAfterBlocker": {
+    "receipt": "build12-messages-blocker-app-group.json",
+    "phase": "idle",
+    "hasTranscript": false
+  },
+  "blocker": "Messages fake-recipient payloads landed on the private thread-list surface instead of a sterile compose draft.",
+  "nextAction": "Provide a direct sterile compose path or operator-opened New Message compose with body focused.",
+  "privacy": {
+    "rawWdaSourcesCommitted": false,
+    "screenshotsCommitted": false,
+    "privateThreadContentCommitted": false,
+    "messageSent": false,
+    "transcriptStaged": false
+  },
+  "verdict": "privacy_blocked_before_draft"
+}
