@@ -16,8 +16,7 @@ struct ContentView: View {
     @State private var secureEntry = ""
     @State private var providerKeyEntry = ""
     @State private var providerCredentialMessage = ""
-    @State private var selectedSetupRoute = FoilSetupRoute.mac
-    @State private var showAdvancedSupport = false
+    @State private var showDiagnostics = false
     @State private var lastHandledCommandID: String?
     @AppStorage("foil.onboarding.selectedRoute.v1") private var selectedRouteID = FoilDictationLoopPresenter.macRouteID
     private let refreshTimer = Timer.publish(every: 0.75, on: .main, in: .common).autoconnect()

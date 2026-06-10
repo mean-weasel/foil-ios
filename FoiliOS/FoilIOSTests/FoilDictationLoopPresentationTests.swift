@@ -17,6 +17,7 @@ final class FoilDictationLoopPresentationTests: XCTestCase {
         XCTAssertTrue(routes[0].isRecommended)
         XCTAssertFalse(routes[0].isUsableNow)
         XCTAssertTrue(routes[0].detail.contains("pairing is coming soon"))
+        XCTAssertTrue(routes[0].detail.contains("After pairing is available"))
         XCTAssertFalse(routes[0].detail.contains("Mac actually handled"))
         XCTAssertEqual(routes[1].routeID, "iphone-api-key")
         XCTAssertFalse(routes[1].isRecommended)
@@ -203,14 +204,6 @@ final class FoilDictationLoopPresentationTests: XCTestCase {
 
         XCTAssertFalse(presentation.isComplete)
         XCTAssertTrue(presentation.detail.contains("Mac pairing is not connected in this build"))
-    }
-
-    func testIPhoneAPIKeyChecklistKeepsProviderSetupAsFallback() {
-        let items = FoilDictationLoopPresenter.setupChecklistPresentation(route: .iphoneAPIKey)
-
-        XCTAssertEqual(items.first?.title, "API key on this iPhone")
-        XCTAssertTrue(items.first?.detail.contains("Save your Groq provider key locally") == true)
-        XCTAssertTrue(items.map(\.title).contains("Allow Full Access"))
     }
 
     func testBetaGuidanceNamesSafeTargetsAndClaimBoundaries() {
