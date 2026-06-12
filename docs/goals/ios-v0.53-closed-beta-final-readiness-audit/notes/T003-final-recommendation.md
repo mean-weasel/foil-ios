@@ -21,7 +21,6 @@ Do not invite broader closed beta testers or describe the iOS preview as general
 - PR #29: keyboard setup and Full Access recovery remains draft/open.
 - PR #30: recording/transcription quality loop remains draft/open.
 - PR #31: Insert Latest freshness/exact-once polish remains draft/open.
-- PR #46 and PR #47: GoalBuddy ledger metadata fixes are open and mergeable, but still had CodeQL swift in progress at the audit rerun.
 - v0.47/v0.48: additional current-build host-app matrix expansion is blocked right now because `scripts/ios-physical-harness.py preflight --strict --wda-url http://192.168.1.40:8100` fails closed with `classification: wda_unreachable`.
 
 ## Strongest Realistic Failure Mode
@@ -39,4 +38,4 @@ Evidence ruling this down:
 
 ## Final Decision
 
-The closed-beta polish conveyor is complete as an audit conveyor, not as a broad-launch conveyor. The safest next product posture is `invite_narrow_internal_build13_only`: keep build 13 internal feedback moving with strict private-content guardrails, then resume broader beta work after the draft UX PRs, GoalBuddy ledger PRs, and fresh physical host-app matrix proof are complete.
+The closed-beta polish conveyor is complete as an audit conveyor, not as a broad-launch conveyor. The safest next product posture is `invite_narrow_internal_build13_only`: keep build 13 internal feedback moving with strict private-content guardrails, then resume broader beta work after the draft UX PRs and fresh physical host-app matrix proof are complete.
