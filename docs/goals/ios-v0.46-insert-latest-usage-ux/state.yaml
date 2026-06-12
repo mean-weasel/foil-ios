@@ -39,11 +39,35 @@ tasks:
     assignee: Worker
     status: done
     objective: "Polish Insert Latest UX and state handling."
+    allowed_files:
+      - "FoiliOS/FoilKeyboard/KeyboardViewController.swift"
+      - "FoiliOS/Shared/FoilDictationLoopPresenter.swift"
+      - "FoiliOS/Shared/FoilKeyboardBridge.swift"
+      - "FoiliOS/FoilIOSTests/FoilDictationLoopPresentationTests.swift"
+      - "FoiliOS/FoilIOSTests/FoilKeyboardBridgeTests.swift"
+      - "docs/goals/ios-v0.46-insert-latest-usage-ux/state.yaml"
+      - "docs/goals/ios-v0.46-insert-latest-usage-ux/**"
     acceptance_criteria:
       - "Keyboard state is explicit for fresh, missing, stale, already inserted, and reset states."
     receipt:
       result: done
       summary: "Added freshness-aware Insert Latest checks and stale transcript keyboard presentation, with focused bridge/presenter tests."
+      changed_files:
+        - "FoiliOS/FoilKeyboard/KeyboardViewController.swift"
+        - "FoiliOS/Shared/FoilDictationLoopPresenter.swift"
+        - "FoiliOS/Shared/FoilKeyboardBridge.swift"
+        - "FoiliOS/FoilIOSTests/FoilDictationLoopPresentationTests.swift"
+        - "FoiliOS/FoilIOSTests/FoilKeyboardBridgeTests.swift"
+        - "docs/goals/ios-v0.46-insert-latest-usage-ux/state.yaml"
+      commands:
+        - cmd: "xcodebuild test -project FoiliOS/FoilIOS.xcodeproj -scheme FoilIOS -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:FoilIOSTests/FoilKeyboardBridgeTests -only-testing:FoilIOSTests/FoilDictationLoopPresentationTests"
+          status: pass
+        - cmd: "xcodebuild test -project FoiliOS/FoilIOS.xcodeproj -scheme FoilIOS -destination 'platform=iOS Simulator,name=iPhone 17'"
+          status: pass
+        - cmd: "xcodebuild build -project FoiliOS/FoilIOS.xcodeproj -scheme FoilIOS -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO"
+          status: pass
+        - cmd: "git diff --check"
+          status: pass
       evidence:
         - "docs/goals/ios-v0.46-insert-latest-usage-ux/notes/T002-worker-receipt.md"
       verification:
