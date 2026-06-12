@@ -93,3 +93,25 @@ tasks:
         - "scripts/ios-physical-harness.py status"
       next_owner: "operator"
       next_action: "Approve or perform WDA/TestFlight/device actions required to make physical UI automation reachable, then rerun setup and recovery proof."
+  - id: T004
+    type: judge
+    assignee: PM
+    status: blocked
+    objective: "Collect physical keyboard setup/recovery receipts after WDA recovery."
+    acceptance_criteria:
+      - "Receipts prove recovery guidance and disabled keyboard behavior while Full Access is unavailable."
+      - "If Full Access is still unavailable, receipts name the blocker without private content."
+    receipt:
+      result: external_blocker
+      summary: "Physical iPhone receipts prove #29 recovery guidance is present in the app and Foil Keyboard keeps Insert Latest disabled with a Full Access/refocus/cycle message. The enabled Full Access path remains physically blocked because the keyboard reports Full Access unavailable."
+      evidence:
+        - "docs/goals/ios-v0.44-keyboard-setup-full-access-recovery/notes/T004-physical-receipt.md"
+        - "docs/goals/ios-v0.44-keyboard-setup-full-access-recovery/notes/physical/T004-app-recovery-copy.json"
+        - "docs/goals/ios-v0.44-keyboard-setup-full-access-recovery/notes/physical/T004-keyboard-disabled.json"
+        - "docs/goals/ios-v0.44-keyboard-setup-full-access-recovery/notes/physical/T004-keyboard-full-access-disabled.json"
+        - "docs/goals/ios-v0.44-keyboard-setup-full-access-recovery/notes/physical/T004-app-group-after-keyboard.json"
+      missing:
+        - "Physical receipt for enabled Full Access after cycling/refocusing Foil Keyboard."
+        - "Physical receipt for stale-state reset success once Full Access is enabled."
+      next_owner: "operator"
+      next_action: "Enable Allow Full Access for Foil Keyboard in iOS Settings, refocus a safe host field, cycle back to Foil Keyboard, then rerun the enabled-path receipts."
